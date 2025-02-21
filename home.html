@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Cognitive Health Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:powderblue;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .box {
+            width: 30%;
+            background: peachpuff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-in-out forwards;
+            box-shadow: 5px 5px 10px gray, -5px -5px 10px black;
+        }
+        .icon {
+            font-size: 40px;
+            color: #1976d2;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        p {
+            color: #555;
+        }
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Delays for each box */
+        .box:nth-child(1) { animation-delay: 0.2s; }
+        .box:nth-child(2) { animation-delay: 0.4s; }
+        .box:nth-child(3) { animation-delay: 0.6s; }
+        .box:nth-child(4) { animation-delay: 0.8s; }
+        .box:nth-child(5) { animation-delay: 1s; }
+        .box:nth-child(6) { animation-delay: 1.2s; }
+        
+        /* Responsive for smaller screens */
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            .box {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box">
+            <div class="icon">🧠</div>
+            <h2>What is Cognitive Disorder?</h2>
+            <p>Cognitive disorders like dementia and memory loss affect brain function, making daily life challenging.</p>
+        </div>
+
+        <div class="box">
+            <div class="icon">📌</div>
+            <h2>Tips & Suggestions</h2>
+            <p>Get expert advice on improving brain health, memory exercises, and lifestyle changes for better cognitive function.</p>
+        </div>
+
+        <div class="box">
+            <div class="icon">🎮</div>
+            <h2>Memory-Based Games</h2>
+            <p>Engage in fun and challenging games designed to enhance memory, focus, and problem-solving skills.</p>
+        </div>
+
+        <div class="box">
+            <div class="icon">🔊</div>
+            <h2>Voice Recording</h2>
+            <p>Store voice recordings to help recall important memories and preserve precious moments.</p>
+        </div>
+
+        <div class="box">
+            <div class="icon">📖</div>
+            <h2>Educational Resources</h2>
+            <p>Access articles, research, and the latest updates on cognitive disorders and brain health.</p>
+        </div>
+
+        <div class="box">
+            <div class="icon">💙</div>
+            <h2>Our Mission</h2>
+            <p>To empower individuals and caregivers with tools that promote cognitive wellness and memory retention.</p>
+        </div>
+    </div>
+
+</body>
+</html>

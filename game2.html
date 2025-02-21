@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Math Puzzles</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .puzzle-container {
+            margin-top: 20px;
+        }
+        input {
+            margin: 10px;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Math Puzzles</h1>
+    <div class="puzzle-container">
+        <p id="question"></p>
+        <input type="number" id="answer" placeholder="Your answer">
+        <button onclick="checkAnswer()">Submit</button>
+        <p id="feedback"></p>
+    </div>
+    
+    <script>
+        let num1, num2, correctAnswer;
+        
+        function generatePuzzle() {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 + num2;
+            document.getElementById("question").textContent = `What is ${num1} + ${num2}?`;
+            document.getElementById("feedback").textContent = "";
+            document.getElementById("answer").value = "";
+        }
+        
+        function checkAnswer() {
+            let userAnswer = parseInt(document.getElementById("answer").value);
+            if (userAnswer === correctAnswer) {
+                document.getElementById("feedback").textContent = "Correct! 🎉";
+                setTimeout(generatePuzzle, 1000);
+            } else {
+                document.getElementById("feedback").textContent = "Try again! ❌";
+            }
+        }
+        
+        generatePuzzle();
+    </script>
+</body>
+</html>

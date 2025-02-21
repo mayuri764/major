@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Matching Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            width: 100px;
+            height: 100px;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: lightgray;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Memory Matching Game</h1>
+    <div class="grid" id="gameBoard"></div>
+    <script>
+        const emojis = ["🍎", "🍌", "🍇", "🍉", "🍓", "🥕", "🥭", "🍒"];
+        let cards = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+        let firstCard = null;
+        let firstElement = null;
+        let matches = 0;
+
+        function createBoard() {
+            const board = document.getElementById("gameBoard");
+            cards.forEach((emoji, index) => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.dataset.index = index;
+                card.addEventListener("click", flipCard);
+                board.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (this.textContent !== "") return;
+            const index = this.dataset.index;
+            this.textContent = cards[index];
+            
+            if (!firstCard) {
+                firstCard = cards[index];
+                firstElement = this;
+            } else {
+                if (firstCard === cards[index] && this !== firstElement) {
+                    matches++;
+                    if (matches === emojis.length) {
+                        setTimeout(() => alert("You won!"), 500);
+                    }
+                } else {
+                    setTimeout(() => {
+                        this.textContent = "";
+                        firstElement.textContent = "";
+                    }, 1000);
+                }
+                firstCard = null;
+                firstElement = null;
+            }
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>

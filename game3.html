@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensory Visual Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        .game-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h2>Match the Colors</h2>
+        <p>Select the color: <span id="targetColor" style="font-weight: bold;"></span></p>
+        <div id="colorOptions"></div>
+        <p id="message" style="color: red; margin-top: 10px;"></p>
+    </div>
+
+    <script>
+        const colors = ["red", "blue", "green", "yellow", "orange", "purple"];
+        let targetColor = "";
+
+        function startGame() {
+            targetColor = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById("targetColor").textContent = targetColor;
+            
+            let colorOptions = document.getElementById("colorOptions");
+            colorOptions.innerHTML = "";
+            
+            colors.sort(() => 0.5 - Math.random()); // Shuffle colors
+            colors.forEach(color => {
+                let div = document.createElement("div");
+                div.className = "color-box";
+                div.style.backgroundColor = color;
+                div.onclick = () => checkColor(color);
+                colorOptions.appendChild(div);
+            });
+        }
+
+        function checkColor(selectedColor) {
+            if (selectedColor === targetColor) {
+                document.getElementById("message").textContent = "Correct! Well done.";
+                document.getElementById("message").style.color = "green";
+                setTimeout(startGame, 1000);
+            } else {
+                document.getElementById("message").textContent = "Try again.";
+                document.getElementById("message").style.color = "red";
+            }
+        }
+
+        window.onload = startGame;
+    </script>
+</body>
+</html>

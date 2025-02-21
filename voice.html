@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Recorder</title>
+</head>
+<body>
+
+    <button id="start">🎙 Start Recording</button>
+    <button id="stop" disabled>⏹ Stop Recording</button>
+    <button id="save" disabled>💾 Save Recording</button>
+    <button id="delete" disabled>🗑 Delete Recording</button>
+    
+    <audio id="audio" controls></audio>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+        let audioBlob;
+        let audioURL;
+
+        document.getElementById("start").addEventListener("click", async () => {
+            let stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+                audioURL = URL.createObjectURL(audioBlob);
+                document.getElementById("audio").src = audioURL;
+                document.getElementById("save").disabled = false;
+                document.getElementById("delete").disabled = false;
+            };
+
+            mediaRecorder.start();
+            document.getElementById("start").disabled = true;
+            document.getElementById("stop").disabled = false;
+        });
+
+        document.getElementById("stop").addEventListener("click", () => {
+            mediaRecorder.stop();
+            document.getElementById("start").disabled = false;
+            document.getElementById("stop").disabled = true;
+        });
+
+        document.getElementById("save").addEventListener("click", () => {
+            let a = document.createElement("a");
+            a.href = audioURL;
+            a.download = "recording.mp3";
+            a.click();
+        });
+
+        document.getElementById("delete").addEventListener("click", () => {
+            document.getElementById("audio").src = "";
+            document.getElementById("save").disabled = true;
+            document.getElementById("delete").disabled = true;
+            audioChunks = [];
+            audioBlob = null;
+            audioURL = null;
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Picture-Based Login with Camera & Voice Assistance</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        .login-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .images {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        img {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 10px;
+        }
+        img:hover {
+            border-color: blue;
+        }
+        #camera {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Select Your Picture to Login</h2>
+        <button onclick="speakInstructions()">🔊 Listen</button>
+        <div class="images">
+            <img src="image1.jpg" alt="Image 1" onclick="checkLogin('image1.jpg')">
+            <img src="image2.jpg" alt="Image 2" onclick="checkLogin('image2.jpg')">
+            <img src="image3.jpg" alt="Image 3" onclick="checkLogin('image3.jpg')">
+        </div>
+        <p id="message" style="color: red; margin-top: 10px;"></p>
+        
+        <h2>Or Upload Your Image</h2>
+        <video id="camera" width="300" height="200" autoplay></video>
+        <button onclick="captureImage()">Capture Image</button>
+        <canvas id="canvas" style="display:none;"></canvas>
+    </div>
+
+    <script>
+        const correctImage = "image2.jpg"; // The correct login image
+
+        function checkLogin(selectedImage) {
+            if (selectedImage === correctImage) {
+                document.getElementById("message").textContent = "Login successful!";
+                document.getElementById("message").style.color = "green";
+                setTimeout(() => window.location.href = "dashboard.html", 1000);
+            } else {
+                document.getElementById("message").textContent = "Wrong image. Try again.";
+            }
+        }
+
+        function speakInstructions() {
+            const message = new SpeechSynthesisUtterance("Please select the correct image to log in.");
+            window.speechSynthesis.speak(message);
+        }
+
+        // Access camera
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                document.getElementById("camera").srcObject = stream;
+            })
+            .catch(error => {
+                console.error("Camera access denied", error);
+            });
+
+        function captureImage() {
+            const video = document.getElementById("camera");
+            const canvas = document.getElementById("canvas");
+            const context = canvas.getContext("2d");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            alert("Image Captured! This can be stored and used for login.");
+        }
+    </script>
+</body>
+</html>

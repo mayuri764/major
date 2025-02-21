@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cognitive Health Tips</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .tip {
+            background: #e3f2fd;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 5px solid #1976d2;
+            border-radius: 5px;
+        }
+        .suggestions {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🧠 Cognitive Health Tips</h2>
+        
+        <div class="tip">
+            <strong>1. Stay Mentally Active</strong>
+            <p>Engage in puzzles, reading, or learning new skills to keep your brain stimulated.</p>
+        </div>
+
+        <div class="tip">
+            <strong>2. Follow a Healthy Diet</strong>
+            <p>Eat brain-boosting foods like nuts, fish, leafy greens, and berries to support cognitive function.</p>
+        </div>
+
+        <div class="tip">
+            <strong>3. Exercise Regularly</strong>
+            <p>Physical activity improves blood flow to the brain and helps reduce the risk of cognitive decline.</p>
+        </div>
+
+        <div class="tip">
+            <strong>4. Get Enough Sleep</strong>
+            <p>Aim for 7-9 hours of quality sleep per night to support memory consolidation and brain function.</p>
+        </div>
+
+        <div class="tip">
+            <strong>5. Stay Socially Engaged</strong>
+            <p>Interacting with family and friends helps keep your mind sharp and reduces the risk of memory loss.</p>
+        </div>
+
+        <div class="tip">
+            <strong>6. Manage Stress</strong>
+            <p>Practice relaxation techniques like meditation and deep breathing to reduce stress and improve mental clarity.</p>
+        </div>
+
+        <div class="suggestions">
+            <h3>💡 Have a Tip to Share?</h3>
+            <p>Submit your own cognitive health suggestion:</p>
+            <input type="text" id="userTip" placeholder="Enter your tip here..." style="width: 100%; padding: 8px;">
+            <button onclick="addTip()" style="margin-top: 10px; padding: 8px; background: #1976d2; color: white; border: none; cursor: pointer;">Submit</button>
+        </div>
+
+        <div id="newTips"></div>
+    </div>
+
+    <script>
+        function addTip() {
+            let userInput = document.getElementById("userTip").value;
+            if (userInput.trim() !== "") {
+                let newTip = document.createElement("div");
+                newTip.classList.add("tip");
+                newTip.innerHTML = `<strong>New Suggestion:</strong><p>${userInput}</p>`;
+                document.getElementById("newTips").appendChild(newTip);
+                document.getElementById("userTip").value = ""; // Clear input field
+            }
+        }
+    </script>
+
+</body>
+</html>
