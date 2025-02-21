@@ -89,7 +89,7 @@ body {
     padding:50px;
     
     display:flex;
-    background-color: blueviolet;
+
     color: black;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
